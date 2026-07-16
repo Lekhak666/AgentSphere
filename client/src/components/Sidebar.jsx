@@ -2,9 +2,9 @@ import AgentCard from "./AgentCard";
 
 export default function Sidebar({ agents }) {
   return (
-    <aside className="w-80 p-5 bg-[#0B1020] border-r border-white/10">
+    <div className="w-80 p-5 bg-[#0B1020] border-r border-white/10 overflow-y-auto">
 
-      <h2 className="text-gray-400 uppercase tracking-widest text-xs mb-4">
+      <h2 className="text-xs uppercase tracking-[0.25em] text-gray-500 mb-6">
         AI AGENTS
       </h2>
 
@@ -19,6 +19,6 @@ export default function Sidebar({ agents }) {
 
       </div>
 
-    </aside>
+    </div>
   );
 }

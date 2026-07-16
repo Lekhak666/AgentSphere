@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { plannerAgent } from "./agents/planner.js";
 
 dotenv.config();
 
@@ -16,14 +17,24 @@ app.get("/", (req, res) => {
 });
 
 app.post("/api/execute", async (req, res) => {
-  const { prompt } = req.body;
+  try {
+    const { prompt } = req.body;
 
-  console.log(prompt);
+    const plan = await plannerAgent(prompt);
 
-  res.json({
-    success: true,
-    output: `Received task: ${prompt}`,
-  });
+    res.json({
+      success: true,
+      output: plan,
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      output: "Planner Agent failed.",
+    });
+  }
 });
 
 const PORT = process.env.PORT || 5000;
