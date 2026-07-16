@@ -48,6 +48,31 @@ export default function Dashboard() {
 
   const [output, setOutput] = useState("");
 
+        const executeTask = async () => {
+        if (!prompt.trim()) return;
+
+        const response = await fetch("http://localhost:5000/api/execute", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+            prompt,
+            }),
+        });
+
+        const data = await response.json();
+
+        setOutput(data.output);
+
+        setLogs((prev) => [
+            ...prev,
+            `Task received: ${prompt}`,
+        ]);
+
+        setPrompt("");
+        };
+
   return (
     <div className="min-h-screen bg-[#050816] text-white">
 
@@ -62,6 +87,7 @@ export default function Dashboard() {
           <CommandBox
             prompt={prompt}
             setPrompt={setPrompt}
+            executeTask={executeTask}
           />
 
           <ActivityPanel logs={logs} />
