@@ -1,4 +1,4 @@
-export default function OutputPanel() {
+export default function OutputPanel({ output }) {
   return (
     <div className="bg-[#121A2F] rounded-xl border border-white/10 p-6">
 
@@ -6,9 +6,13 @@ export default function OutputPanel() {
         📄 Final Output
       </h2>
 
-      <p className="text-gray-400">
-        Your AI team's final response will appear here.
-      </p>
+      {output ? (
+        <p>{output}</p>
+      ) : (
+        <p className="text-gray-500">
+          Dispatch a task to begin collaboration.
+        </p>
+      )}
 
     </div>
   );

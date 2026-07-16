@@ -1,37 +1,24 @@
 import AgentCard from "./AgentCard";
 
-export default function Sidebar() {
+export default function Sidebar({ agents }) {
   return (
-    <div className="w-80 p-5 space-y-4 bg-[#0B1020] border-r border-white/10">
-    
-    <h2 className="text-gray-400 uppercase tracking-widest text-xs mb-4">
-    AI AGENTS
-    </h2>
+    <aside className="w-80 p-5 bg-[#0B1020] border-r border-white/10">
 
-      <AgentCard
-        icon="🧠"
-        name="Planner"
-        status="Ready"
-      />
+      <h2 className="text-gray-400 uppercase tracking-widest text-xs mb-4">
+        AI AGENTS
+      </h2>
 
-      <AgentCard
-        icon="🔎"
-        name="Researcher"
-        status="Ready"
-      />
+      <div className="space-y-4">
 
-      <AgentCard
-        icon="✍"
-        name="Writer"
-        status="Ready"
-      />
+        {agents.map((agent) => (
+          <AgentCard
+            key={agent.id}
+            {...agent}
+          />
+        ))}
 
-      <AgentCard
-        icon="✅"
-        name="Reviewer"
-        status="Ready"
-      />
+      </div>
 
-    </div>
+    </aside>
   );
 }
