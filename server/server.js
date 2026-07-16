@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { plannerAgent } from "./agents/planner.js";
+import { researcherAgent } from "./agents/researcher.js";
+import { writerAgent } from "./agents/writer.js";
+import { reviewerAgent } from "./agents/reviewer.js";
 
 dotenv.config();
 
@@ -17,26 +20,36 @@ app.get("/", (req, res) => {
 });
 
 app.post("/api/execute", async (req, res) => {
+
   try {
+
     const { prompt } = req.body;
 
     const plan = await plannerAgent(prompt);
 
+    const research = await researcherAgent(plan);
+
+    const draft = await writerAgent(research);
+
+    const finalAnswer = await reviewerAgent(draft);
+
     res.json({
       success: true,
-      output: plan,
+      output: finalAnswer,
     });
 
   } catch (error) {
+
     console.error(error);
 
     res.status(500).json({
       success: false,
-      output: "Planner Agent failed.",
+      output: "Agent workflow failed.",
     });
-  }
-});
 
+  }
+
+});
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

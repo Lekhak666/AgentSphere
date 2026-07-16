@@ -8,53 +8,30 @@ const ai = new GoogleGenAI({
 });
 
 export async function askGemini(systemPrompt, userPrompt) {
+  try {
+    const response = await ai.models.generateContent({
+      model: process.env.GEMINI_MODEL,
+      contents: `${systemPrompt}\n\n${userPrompt}`,
+    });
 
-  const delays = [1000, 2000, 4000];
+    return response.text;
 
-  for (let attempt = 0; attempt < delays.length; attempt++) {
+  } catch (err) {
 
-    try {
+    console.log("REAL GEMINI ERROR:");
+    console.log(err);
 
-      const response = await ai.models.generateContent({
-        model: process.env.GEMINI_MODEL,
-        contents: [
-          {
-            role: "user",
-            parts: [
-              {
-                text: `${systemPrompt}
+    console.log("Gemini unavailable. Using fallback.");
 
-User Request:
-${userPrompt}`,
-              },
-            ],
-          },
-        ],
-      });
+    return `
+Execution Plan
 
-      console.log(response);
-
-      return response.text;
-
-    } catch (error) {
-
-      // Retry only when Google's servers are temporarily unavailable.
-      if (error.status === 503 && attempt < delays.length - 1) {
-
-        console.log(
-          `Gemini busy. Retrying in ${delays[attempt]} ms...`
-        );
-
-        await new Promise(resolve =>
-          setTimeout(resolve, delays[attempt])
-        );
-
-        continue;
-      }
-
-      throw error;
-    }
+1. Analyze the user's request.
+2. Break the task into smaller steps.
+3. Research technologies.
+4. Generate the solution.
+5. Review and polish the final answer.
+`;
 
   }
-
 }
