@@ -9,8 +9,17 @@ export default function CommandBox() {
       <input
         type="text"
         placeholder="Ask your AI Team anything..."
-        className="w-full bg-[#1A233A] rounded-lg p-4 outline-none border border-white/10"
-      />
+        className="
+        w-full
+        bg-[#0B1020]
+        rounded-xl
+        p-5
+        border
+        border-white/10
+        outline-none
+        focus:border-indigo-500
+        transition"
+    />
 
       <p className="text-sm text-gray-400 mt-3">
         Press Enter to launch your AI agents.
