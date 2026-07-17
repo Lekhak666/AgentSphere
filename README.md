@@ -282,4 +282,6 @@ It helps the project grow and motivates future improvements.
 
 ---
 
+## ̶A̶̶L̶̶L̶ ̶H̶̶A̶̶I̶̶L̶ ̶T̶̶E̶̶A̶̶M̶ ̶S̶̶P̶̶H̶̶E̶̶R̶̶E̶
+
 ## Thank You ❤️
