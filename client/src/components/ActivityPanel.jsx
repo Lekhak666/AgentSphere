@@ -1,41 +1,31 @@
+import { motion } from "framer-motion";
+
 export default function ActivityPanel({ logs }) {
   return (
-    <div className="bg-[#121A2F] rounded-xl border border-white/10 p-6">
-
-      <h2 className="text-xl font-semibold mb-5">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="bg-[#121A2F] rounded-2xl border border-white/10 p-6"
+    >
+      <h2 className="text-xl font-bold mb-5">
         ⚡ Live Agent Activity
       </h2>
 
-      <div className="space-y-3">
+      <div className="space-y-3 max-h-72 overflow-y-auto">
 
         {logs.map((log, index) => (
-
-          <div
+          <motion.div
             key={index}
-            className="
-            flex
-            items-center
-            gap-3
-            bg-[#0B1020]
-            rounded-lg
-            px-4
-            py-3
-            border
-            border-white/5
-            "
+            initial={{ opacity: 0, x: -15 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.05 }}
+            className="bg-[#0A1024] rounded-lg px-4 py-3 border border-white/5"
           >
-            <div className="w-2 h-2 rounded-full bg-indigo-400" />
-
-            <p className="text-gray-300 text-sm">
-              {log}
-            </p>
-
-          </div>
-
+            {log}
+          </motion.div>
         ))}
 
       </div>
-
-    </div>
+    </motion.div>
   );
 }

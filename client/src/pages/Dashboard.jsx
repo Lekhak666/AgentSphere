@@ -99,7 +99,7 @@ export default function Dashboard() {
       await delay(900);
       updateAgentStatus("reviewer", "Completed");
 
-      const response = await fetch("http://localhost:5000/api/execute", {
+      const response = await fetch("/api/execute", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

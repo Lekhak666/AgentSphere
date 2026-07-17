@@ -1,85 +1,72 @@
+import { motion } from "framer-motion";
+
 export default function AgentCard({
   icon,
   name,
   role,
   status,
 }) {
-
-  const statusStyle = {
-    Idle: {
-      badge: "bg-gray-500/20 text-gray-300",
-      dot: "bg-gray-400",
-      label: "⚪ Idle",
-    },
-
-    Working: {
-      badge: "bg-yellow-500/20 text-yellow-300",
-      dot: "bg-yellow-400 animate-pulse",
-      label: "🟡 Working",
-    },
-
-    Completed: {
-      badge: "bg-green-500/20 text-green-300",
-      dot: "bg-green-400",
-      label: "🟢 Completed",
-    },
+  const getStatusColor = () => {
+    switch (status) {
+      case "Working":
+        return "bg-yellow-400";
+      case "Completed":
+        return "bg-green-400";
+      default:
+        return "bg-gray-500";
+    }
   };
 
-  const current =
-    statusStyle[status] || statusStyle.Idle;
-
   return (
-    <div
+    <motion.div
+      whileHover={{
+        scale: 1.03,
+        y: -4,
+      }}
+      transition={{ duration: 0.2 }}
       className="
-      bg-[#121A2F]
-      rounded-xl
-      p-5
-      border
-      border-white/10
-      hover:border-indigo-500
-      hover:-translate-y-1
-      transition-all
-      duration-300
+        bg-[#121A2F]
+        rounded-2xl
+        p-5
+        border
+        border-white/10
+        hover:border-cyan-400
+        transition-all
+        duration-300
+        shadow-lg
       "
     >
-      <div className="flex justify-between items-start">
+      <div className="flex items-center justify-between">
 
         <div>
 
-          <h3 className="font-semibold text-lg">
-            {icon} {name}
+          <div className="text-3xl mb-2">
+            {icon}
+          </div>
+
+          <h3 className="text-lg font-bold">
+            {name}
           </h3>
 
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-sm text-gray-400 mt-1">
             {role}
           </p>
 
-          <span
-            className={`
-              inline-block
-              mt-4
-              px-3
-              py-1
-              rounded-full
-              text-xs
-              font-medium
-              ${current.badge}
-            `}
-          >
-            {current.label}
+        </div>
+
+        <div className="flex flex-col items-center">
+
+          <div
+            className={`w-4 h-4 rounded-full animate-pulse ${getStatusColor()}`}
+          />
+
+          <span className="text-xs mt-2 text-gray-400">
+            {status}
           </span>
 
         </div>
 
-        <div
-          className={`
-            w-3
-            h-3
-            rounded-full
-            ${current.dot}
-          `}
-        />
       </div>
-    </div>
+    </motion.div>
   );
 }

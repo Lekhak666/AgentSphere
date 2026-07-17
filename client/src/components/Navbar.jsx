@@ -2,30 +2,60 @@ import { Bot } from "lucide-react";
 
 export default function Navbar() {
   return (
-    <nav className="h-16 border-b border-white/10 bg-[#0B1020] flex items-center justify-between px-8">
-
+    <header
+      className="
+        h-16
+        px-8
+        flex
+        items-center
+        justify-between
+        border-b
+        border-white/10
+        bg-[#0B1120]
+        backdrop-blur-md
+      "
+    >
       <div className="flex items-center gap-3">
 
-        <div className="bg-indigo-600 p-2 rounded-xl">
-          <Bot size={22}/>
+        <div
+          className="
+            h-11
+            w-11
+            rounded-xl
+            bg-cyan-500/20
+            flex
+            items-center
+            justify-center
+          "
+        >
+          <Bot className="text-cyan-400" size={24} />
         </div>
 
         <div>
-          <h1 className="font-bold text-xl">
+
+          <h1 className="text-xl font-bold tracking-wide">
             AgentSphere
           </h1>
 
           <p className="text-xs text-gray-400">
-            Multi-Agent AI Workspace
+            Autonomous Multi-Agent AI Platform
           </p>
+
         </div>
 
       </div>
 
-      <span className="text-sm text-gray-500">
-        Powered by Gemini
-      </span>
+      <div className="text-right">
 
-    </nav>
+        <div className="text-sm text-gray-400">
+          Powered by
+        </div>
+
+        <div className="font-semibold text-cyan-400">
+          Groq • Llama 3.3 70B
+        </div>
+
+      </div>
+    </header>
   );
 }
