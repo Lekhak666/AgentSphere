@@ -1,8 +1,8 @@
-import { askGemini } from "../utils/gemini.js";
+import { askLLM } from "../utils/groq.js";
 
 export async function reviewerAgent(content) {
 
-  return await askGemini(
+  return await askLLM(
 `You are the Reviewer Agent.
 
 Improve grammar, structure and clarity.`,
